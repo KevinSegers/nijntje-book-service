@@ -20,7 +20,6 @@ jobs:
         with:
           mysql database: 'booksdb_test' # Optional, default value is "test". The specified database which will be created.
           mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }} # Required if "mysql user" is empty, default is empty. The root superuser password
-
       - name: Build, test and package project
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
