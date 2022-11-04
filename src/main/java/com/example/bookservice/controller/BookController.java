@@ -19,7 +19,7 @@ public class BookController {
     @PostConstruct
     public void fillDB() {
         if (bookRepository.count() == 0) {
-            bookRepository.save(new Book("Nijntje in de speeltuin", "Dick Bruna", Category.NIJNTJE, false, true, "https://i.postimg.cc/RFrDZ6zc/Nijntjeindespeeltuin.jpg", "https://i.postimg.cc/8cm3319L/Nijntjeindespeeltuinachterkant.jpg"));
+            bookRepository.save(new Book("Nijntje in de speeltuin", "Dick Bruna", Category.NIJNTJE, true, true, "https://i.postimg.cc/RFrDZ6zc/Nijntjeindespeeltuin.jpg", "https://i.postimg.cc/8cm3319L/Nijntjeindespeeltuinachterkant.jpg"));
             bookRepository.save(new Book("Nijntje", "Dick Bruna", Category.NIJNTJE, false, false, "https://i.postimg.cc/m2VJygQs/Nijntje.jpg", "https://i.postimg.cc/FHRqWXZJ/Nijntjeachterkant.jpg"));
             bookRepository.save(new Book("Nijntje in de dierentuin", "Dick Bruna", Category.NIJNTJE, false, false, "https://i.postimg.cc/Gm5f6g7g/Nijntjeindedierentuin.jpg", "https://i.postimg.cc/65BFZv4c/Nijntjeindedierentuinachterkant.jpg"));
             bookRepository.save(new Book("Samen spelen samen delen", "Gert Verhulst", Category.BUMBA, false, false, "https://i.postimg.cc/rww6Br8s/Bumbasamenspelensamendelen.jpg", "https://i.postimg.cc/L8Qd28XT/Bumbasamenspelensamendelenachterkant.jpg"));
@@ -55,7 +55,7 @@ public class BookController {
         return book;
     }
 
-    @PutMapping("/books") //Hier moet nog een boek meegegeven worden dat aangepast moet worden
+    @PutMapping("/books") //Hier moet nog het boek meegegeven worden dat aangepast moet worden
     public Book updateBook(@RequestBody Book updatedBook) {
         Book retrievedBook = bookRepository.findBookById(updatedBook.getId());
         retrievedBook.setAuthor(updatedBook.getAuthor());
