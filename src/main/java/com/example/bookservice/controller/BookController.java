@@ -55,7 +55,7 @@ public class BookController {
         return book;
     }
 
-    @PutMapping("/books")
+    @PutMapping("/books") //Hier moet nog een boek meegegeven worden dat aangepast moet worden
     public Book updateBook(@RequestBody Book updatedBook) {
         Book retrievedBook = bookRepository.findBookById(updatedBook.getId());
         retrievedBook.setAuthor(updatedBook.getAuthor());
