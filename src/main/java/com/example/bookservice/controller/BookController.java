@@ -55,7 +55,7 @@ public class BookController {
         return book;
     }
 
-    @PutMapping("/books") //Hier moet nog het boek meegegeven worden dat aangepast moet worden
+    @PutMapping("/books")
     public Book updateBook(@RequestBody Book updatedBook) {
         Book retrievedBook = bookRepository.findBookById(updatedBook.getId());
         retrievedBook.setAuthor(updatedBook.getAuthor());
@@ -69,7 +69,7 @@ public class BookController {
     }
 
     @DeleteMapping("/books/{bookTitle}")
-    public ResponseEntity deleteBook(@PathVariable String bookTitle) {
+    public ResponseEntity<Book> deleteBook(@PathVariable String bookTitle) {
         Book book = bookRepository.findBookByTitle(bookTitle);
         if (book != null) {
             bookRepository.delete(book);
