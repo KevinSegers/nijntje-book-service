@@ -58,13 +58,10 @@ public class BookController {
     @PutMapping("/book")
     public Book updateBook(@RequestBody Book updatedBook) {
         Book retrievedBook = bookRepository.findBookById(updatedBook.getId());
-        retrievedBook.setAuthor(updatedBook.getAuthor());
-        retrievedBook.setTitle(updatedBook.getTitle());
-        retrievedBook.setCategory(updatedBook.getCategory());
-        retrievedBook.setAvailable(updatedBook.isAvailable());
-        retrievedBook.setFavorite(updatedBook.isFavorite());
+        if (retrievedBook.isFavorite() != updatedBook.isFavorite()) {
+            retrievedBook.setFavorite(updatedBook.isFavorite());
+        }
         bookRepository.save(retrievedBook);
-
         return retrievedBook;
     }
 
