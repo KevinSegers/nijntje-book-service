@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class BookController {
@@ -60,6 +61,21 @@ public class BookController {
         Book retrievedBook = bookRepository.findBookById(updatedBook.getId());
         if (retrievedBook.isFavorite() != updatedBook.isFavorite()) {
             retrievedBook.setFavorite(updatedBook.isFavorite());
+        }
+        if (retrievedBook.isAvailable() != updatedBook.isAvailable()) {
+            retrievedBook.setAvailable(updatedBook.isAvailable());
+        }
+        if (!Objects.equals(retrievedBook.getAuthor(), updatedBook.getAuthor())) {
+            retrievedBook.setAuthor(updatedBook.getAuthor());
+        }
+        if (!Objects.equals(retrievedBook.getTitle(), updatedBook.getTitle())) {
+            retrievedBook.setTitle(updatedBook.getTitle());
+        }
+        if (!Objects.equals(retrievedBook.getCoverImageUrl(), updatedBook.getCoverImageUrl())) {
+            retrievedBook.setCoverImageUrl(updatedBook.getCoverImageUrl());
+        }
+        if (!Objects.equals(retrievedBook.getBackCoverImageUrl(), updatedBook.getBackCoverImageUrl())) {
+            retrievedBook.setBackCoverImageUrl(updatedBook.getBackCoverImageUrl());
         }
         bookRepository.save(retrievedBook);
         return retrievedBook;
