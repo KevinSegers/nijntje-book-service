@@ -56,7 +56,7 @@ public class BookController {
         return book;
     }
 
-    @PutMapping("/book")
+    @PutMapping("/books")
     public Book updateBook(@RequestBody Book updatedBook) {
         Book retrievedBook = bookRepository.findBookById(updatedBook.getId());
         if (retrievedBook.isFavorite() != updatedBook.isFavorite()) {
@@ -81,8 +81,8 @@ public class BookController {
         return retrievedBook;
     }
 
-    @DeleteMapping("/books/{bookTitle}")
-    public ResponseEntity<Book> deleteBook(@PathVariable String bookTitle) {
+    @DeleteMapping("/books/")
+    public ResponseEntity<Book> deleteBook(@RequestParam String bookTitle) {
         Book book = bookRepository.findBookByTitle(bookTitle);
         if (book != null) {
             bookRepository.delete(book);
