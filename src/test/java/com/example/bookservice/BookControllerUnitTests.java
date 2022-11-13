@@ -120,7 +120,7 @@ class BookControllerUnitTests {
     }
 
     @Test
-    void whenPostBook_thenReturnJsonReview() throws Exception {
+    void whenPostBook_thenReturnJson() throws Exception {
         Book bookBoeDoetDeKoe = new Book("Boe doet de koe", "Gert Verhulst", Category.BUMBA, false, false, "https://i.postimg.cc/bJBdnh3H/Bumbaboedoetdekoe.jpg", "https://i.postimg.cc/W4dB3cqP/Bumbaboedoetdekoeachterkant.jpg");
 
         mockMvc.perform(post("/books")
@@ -138,7 +138,7 @@ class BookControllerUnitTests {
         ;
     }
     @Test
-    void givenBook_whenPutBook_thenReturnJsonReview() throws Exception {
+    void givenBook_whenPutBook_thenReturnJson() throws Exception {
         Book bookBumba = new Book("Samen spelen samen delen", "Gert Verhulst", Category.BUMBA, false, false, "https://i.postimg.cc/rww6Br8s/Bumbasamenspelensamendelen.jpg", "https://i.postimg.cc/L8Qd28XT/Bumbasamenspelensamendelenachterkant.jpg");
 
         given(bookRepository.findBookByTitle("Samen spelen samen delen")).willReturn(bookBumba);
