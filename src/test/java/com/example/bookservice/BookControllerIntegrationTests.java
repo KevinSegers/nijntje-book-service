@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class BookControllerIntegrationTests {
+class BookControllerIntegrationTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,18 +29,18 @@ public class BookControllerIntegrationTests {
     @Autowired
     private BookRepository bookRepository;
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
 
 
-    private Book bookNijntje = new Book("Nijntje", "Dick Bruna", Category.NIJNTJE, false, false, "https://i.postimg.cc/m2VJygQs/Nijntje.jpg", "https://i.postimg.cc/FHRqWXZJ/Nijntjeachterkant.jpg");
-    private Book bookNijntjeInDeSpeeltuin = new Book("Nijntje in de speeltuin", "Dick Bruna", Category.NIJNTJE, false, true, "https://i.postimg.cc/RFrDZ6zc/Nijntjeindespeeltuin.jpg", "https://i.postimg.cc/8cm3319L/Nijntjeindespeeltuinachterkant.jpg");
-    private Book bookBumba = new Book("Samen spelen samen delen", "Gert Verhulst", Category.BUMBA, false, false, "https://i.postimg.cc/rww6Br8s/Bumbasamenspelensamendelen.jpg", "https://i.postimg.cc/L8Qd28XT/Bumbasamenspelensamendelenachterkant.jpg");
+    private final Book bookNijntje = new Book("Nijntje", "Dick Bruna", Category.NIJNTJE, false, false, "https://i.postimg.cc/m2VJygQs/Nijntje.jpg", "https://i.postimg.cc/FHRqWXZJ/Nijntjeachterkant.jpg");
+    private final Book bookNijntjeInDeSpeeltuin = new Book("Nijntje in de speeltuin", "Dick Bruna", Category.NIJNTJE, false, true, "https://i.postimg.cc/RFrDZ6zc/Nijntjeindespeeltuin.jpg", "https://i.postimg.cc/8cm3319L/Nijntjeindespeeltuinachterkant.jpg");
+    private final Book bookBumba = new Book("Samen spelen samen delen", "Gert Verhulst", Category.BUMBA, false, false, "https://i.postimg.cc/rww6Br8s/Bumbasamenspelensamendelen.jpg", "https://i.postimg.cc/L8Qd28XT/Bumbasamenspelensamendelenachterkant.jpg");
 
-    private Book bookToBeDeleted = new Book("Dribbel naar het ziekenhuis", "Eric Hill", Category.DRIBBEL, false, false, "https://i.postimg.cc/W3rxGm7W/Dribbelnaarhetziekenhuis.jpg", "https://i.postimg.cc/43jrH2pH/Dribbelnaarhetziekenhuisachterkant.jpg");
+    private final Book bookToBeDeleted = new Book("Dribbel naar het ziekenhuis", "Eric Hill", Category.DRIBBEL, false, false, "https://i.postimg.cc/W3rxGm7W/Dribbelnaarhetziekenhuis.jpg", "https://i.postimg.cc/43jrH2pH/Dribbelnaarhetziekenhuisachterkant.jpg");
 
 
     @BeforeEach
-    public void beforeAllTests() {
+    void beforeAllTests() {
         bookRepository.deleteAll();
         bookRepository.save(bookNijntje);
         bookRepository.save(bookNijntjeInDeSpeeltuin);
@@ -49,13 +49,13 @@ public class BookControllerIntegrationTests {
     }
 
     @AfterEach
-    public void afterAllTests() {
+    void afterAllTests() {
         bookRepository.deleteAll();
     }
 
 
     @Test
-    public void givenTitle_whenGetBookByTitle_thenReturnJsonBook() throws Exception {
+    void givenTitle_whenGetBookByTitle_thenReturnJsonBook() throws Exception {
         mockMvc.perform(get("/books/title/{title}", "Nijntje in de speeltuin"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -69,7 +69,7 @@ public class BookControllerIntegrationTests {
     }
 
     @Test
-    public void givenCategory_whenGetBooksByCategory_thenReturnJsonBook() throws Exception {
+    void givenCategory_whenGetBooksByCategory_thenReturnJsonBook() throws Exception {
         mockMvc.perform(get("/books/category/{cateorgy}", "NIJNTJE"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -91,7 +91,7 @@ public class BookControllerIntegrationTests {
     }
 
     @Test
-    public void whenGetBooks_thenReturnJsonBook() throws Exception {
+    void whenGetBooks_thenReturnJsonBook() throws Exception {
         mockMvc.perform(get("/books/"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -128,7 +128,7 @@ public class BookControllerIntegrationTests {
     }
 
     @Test
-    public void whenPostBook_thenReturnJsonReview() throws Exception {
+    void whenPostBook_thenReturnJsonReview() throws Exception {
         Book bookBoeDoetDeKoe = new Book("Boe doet de koe", "Gert Verhulst", Category.BUMBA, false, false, "https://i.postimg.cc/bJBdnh3H/Bumbaboedoetdekoe.jpg", "https://i.postimg.cc/W4dB3cqP/Bumbaboedoetdekoeachterkant.jpg");
 
         mockMvc.perform(post("/books")
@@ -147,7 +147,7 @@ public class BookControllerIntegrationTests {
     }
 
     @Test
-    public void givenBook_whenPutBook_thenReturnJsonReview() throws Exception {
+    void givenBook_whenPutBook_thenReturnJsonReview() throws Exception {
 
         Book updatedBook = new Book("Samen spelen samen delen", "Gert Verhulst", Category.BUMBA, true, true, "https://i.postimg.cc/rww6Br8s/Bumbasamenspelensamendelen.jpg", "https://i.postimg.cc/L8Qd28XT/Bumbasamenspelensamendelenachterkant.jpg");
 
@@ -166,7 +166,7 @@ public class BookControllerIntegrationTests {
     }
 
     @Test
-    public void givenBook_whenDeleteBook_thenStatusOk() throws Exception {
+    void givenBook_whenDeleteBook_thenStatusOk() throws Exception {
 
         mockMvc.perform(delete("/books/{bookTitle}", "Dribbel naar het ziekenhuis")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -174,7 +174,7 @@ public class BookControllerIntegrationTests {
     }
 
     @Test
-    public void givenNoBook_whenDeleteBook_thenStatusNotFound() throws Exception {
+    void givenNoBook_whenDeleteBook_thenStatusNotFound() throws Exception {
 
         mockMvc.perform(delete("/books/{bookTitle}", "Titel die niet bestaat")
                         .contentType(MediaType.APPLICATION_JSON))

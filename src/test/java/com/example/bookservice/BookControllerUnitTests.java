@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class BookControllerUnitTests {
+class BookControllerUnitTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,12 +34,12 @@ public class BookControllerUnitTests {
     @MockBean
     private BookRepository bookRepository;
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
 
 
 
     @Test
-    public void givenBook_whenGetBookByTitle_thenReturnJsonBook() throws Exception {
+    void givenBook_whenGetBookByTitle_thenReturnJsonBook() throws Exception {
         Book bookNijntje = new Book("Nijntje", "Dick Bruna", NIJNTJE, false, false, "https://i.postimg.cc/m2VJygQs/Nijntje.jpg", "https://i.postimg.cc/FHRqWXZJ/Nijntjeachterkant.jpg");
 
         given(bookRepository.findBookByTitle("Nijntje")).willReturn(bookNijntje);
@@ -57,7 +57,7 @@ public class BookControllerUnitTests {
     }
 
     @Test
-    public void givenBook_whenGetBooks_thenReturnJsonBook() throws Exception {
+    void givenBook_whenGetBooks_thenReturnJsonBook() throws Exception {
         Book bookNijntjeInDeSpeeltuin = new Book("Nijntje in de speeltuin", "Dick Bruna", NIJNTJE, false, true, "https://i.postimg.cc/RFrDZ6zc/Nijntjeindespeeltuin.jpg", "https://i.postimg.cc/8cm3319L/Nijntjeindespeeltuinachterkant.jpg");
         Book bookNijntje = new Book("Nijntje", "Dick Bruna", NIJNTJE, false, false, "https://i.postimg.cc/m2VJygQs/Nijntje.jpg", "https://i.postimg.cc/FHRqWXZJ/Nijntjeachterkant.jpg");
 
@@ -89,7 +89,7 @@ public class BookControllerUnitTests {
 
 
     @Test
-    public void givenBook_whenGetBooksByCategory_thenReturnJsonBook() throws Exception {
+    void givenBook_whenGetBooksByCategory_thenReturnJsonBook() throws Exception {
         Book bookNijntjeInDeSpeeltuin = new Book("Nijntje in de speeltuin", "Dick Bruna", NIJNTJE, false, true, "https://i.postimg.cc/RFrDZ6zc/Nijntjeindespeeltuin.jpg", "https://i.postimg.cc/8cm3319L/Nijntjeindespeeltuinachterkant.jpg");
         Book bookNijntje = new Book("Nijntje", "Dick Bruna", NIJNTJE, false, false, "https://i.postimg.cc/m2VJygQs/Nijntje.jpg", "https://i.postimg.cc/FHRqWXZJ/Nijntjeachterkant.jpg");
 
@@ -120,7 +120,7 @@ public class BookControllerUnitTests {
     }
 
     @Test
-    public void whenPostBook_thenReturnJsonReview() throws Exception {
+    void whenPostBook_thenReturnJsonReview() throws Exception {
         Book bookBoeDoetDeKoe = new Book("Boe doet de koe", "Gert Verhulst", Category.BUMBA, false, false, "https://i.postimg.cc/bJBdnh3H/Bumbaboedoetdekoe.jpg", "https://i.postimg.cc/W4dB3cqP/Bumbaboedoetdekoeachterkant.jpg");
 
         mockMvc.perform(post("/books")
@@ -138,7 +138,7 @@ public class BookControllerUnitTests {
         ;
     }
     @Test
-    public void givenBook_whenPutBook_thenReturnJsonReview() throws Exception {
+    void givenBook_whenPutBook_thenReturnJsonReview() throws Exception {
         Book bookBumba = new Book("Samen spelen samen delen", "Gert Verhulst", Category.BUMBA, false, false, "https://i.postimg.cc/rww6Br8s/Bumbasamenspelensamendelen.jpg", "https://i.postimg.cc/L8Qd28XT/Bumbasamenspelensamendelenachterkant.jpg");
 
         given(bookRepository.findBookByTitle("Samen spelen samen delen")).willReturn(bookBumba);
@@ -160,7 +160,7 @@ public class BookControllerUnitTests {
     }
 
     @Test
-    public void givenBook_whenDeleteBook_thenStatusOk() throws Exception {
+    void givenBook_whenDeleteBook_thenStatusOk() throws Exception {
         Book bookToBeDeleted = new Book("Dribbel naar het ziekenhuis", "Eric Hill", Category.DRIBBEL, false, false, "https://i.postimg.cc/W3rxGm7W/Dribbelnaarhetziekenhuis.jpg", "https://i.postimg.cc/43jrH2pH/Dribbelnaarhetziekenhuisachterkant.jpg");
 
         given(bookRepository.findBookByTitle("Dribbel naar het ziekenhuis")).willReturn(bookToBeDeleted);
@@ -172,7 +172,7 @@ public class BookControllerUnitTests {
     }
 
     @Test
-    public void givenNoBook_whenDeleteBook_thenStatusNotFound() throws Exception {
+    void givenNoBook_whenDeleteBook_thenStatusNotFound() throws Exception {
         given(bookRepository.findBookByTitle("Titel die niet bestaat")).willReturn(null);
 
 
