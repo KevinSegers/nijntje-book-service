@@ -3,6 +3,7 @@ package com.example.bookservice.controller;
 import com.example.bookservice.model.Book;
 import com.example.bookservice.model.Category;
 import com.example.bookservice.repository.BookRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +58,7 @@ public class BookController {
     }
 
     @PutMapping("/books")
-    public Book updateBook(@RequestBody Book updatedBook) {
+    public Book updateBook(@RequestBody @NotNull Book updatedBook) {
         Book retrievedBook = bookRepository.findBookByTitle(updatedBook.getTitle());
         if (retrievedBook.isFavorite() != updatedBook.isFavorite()) {
             retrievedBook.setFavorite(updatedBook.isFavorite());
