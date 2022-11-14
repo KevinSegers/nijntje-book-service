@@ -39,28 +39,33 @@ public class BookController {
         }
     }
 
+    // Get book by title
     @GetMapping("/books/title/{title}")
     public Book getItemByName(@PathVariable String title) {
         return bookRepository.findBookByTitle(title);
     }
 
+    // Get all books by category
     @GetMapping("/books/category/{category}")
     public List<Book> getBookByCategory(@PathVariable Category category) {
         return bookRepository.findBooksByCategory(category);
     }
 
+    //Get all books
     @GetMapping("/books")
     public List<Book> getBooks() {
         return bookRepository.findAll();
     }
 
 
+    //Post Book
     @PostMapping("/books")
     public Book addBook(@RequestBody Book book) {
         bookRepository.save(book);
         return book;
     }
 
+    //Update Book
     @PutMapping("/books")
     public Book updateBook(@RequestBody @NotNull Book updatedBook) {
         Book retrievedBook = bookRepository.findBookByTitle(updatedBook.getTitle());
@@ -86,6 +91,7 @@ public class BookController {
         return retrievedBook;
     }
 
+    // Delete Book
     @DeleteMapping("/books/{bookTitle}")
     public ResponseEntity<Book> deleteBook(@PathVariable String bookTitle) {
         Book book = bookRepository.findBookByTitle(bookTitle);
