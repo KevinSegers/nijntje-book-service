@@ -41,7 +41,7 @@ public class BookController {
 
     // Get book by title
     @GetMapping("/books/title/{title}")
-    public Book getItemByName(@PathVariable String title) {
+    public Book getBook(@PathVariable String title) {
         return bookRepository.findBookByTitle(title);
     }
 
